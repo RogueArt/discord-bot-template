@@ -9,11 +9,11 @@ const { BOT_TOKEN } = process.env
 import { Client, Intents } from 'discord.js'
 
 // Initialize Discord client
-const client = new Client({ intents: [Intents]})
+const client = new Client({ intents: [Intents.FLAGS.GUILDS]})
 
 // Bring in commands, helper functions
 import { extractCmdAndArgs, isValidMsg } from './utils/lib'
-import { hello } from './commands/index.js'
+import { hello, help } from './commands/index.js'
 
 // Execute on start up
 client.on('ready', () => {
@@ -28,21 +28,24 @@ client.on('messageCreate', async msg => {
     return
   }
 
-  // Log commands for later use
-  // logCmd(msg)
+  // Store logs of commands by users
+  logCmd(msg)
 
   // Get command name and arguments from the message
   const [cmd, args] = extractCmdAndArgs(msg) 
 
   // Call right function for command
   switch (cmd) {
-    // 
+    // Hello world command 
     case 'hello':
-      await hello(msg, args[0])
+      await hello(msg, args)
+      break
+
+    case 'help':
+      await help(msg, args)
       break
     
-
-    // Default command
+    // Default handler if command not understood
     default:
         break
   }
