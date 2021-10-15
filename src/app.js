@@ -12,7 +12,7 @@ import { Client, Intents } from 'discord.js'
 const client = new Client({ intents: [Intents.FLAGS.GUILDS]})
 
 // Bring in commands, helper functions
-import { extractCmdAndArgs, isValidMsg } from './utils/lib'
+import { extractCmdAndArgs, isValidMsg, logCmd } from './utils/lib'
 import { hello, help } from './commands/index.js'
 
 // Execute on start up
