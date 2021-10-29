@@ -6,7 +6,7 @@ dotenv.config()
 const { CMD_PREFIX } = process.env
 
 // Get config data
-import * as CONFIG from '../config.js'
+import * as CONFIG from '../../config.js'
 
 /**
  * Validates a message's contents
@@ -19,7 +19,7 @@ export function isValidMsg(msg) {
 
   /* Perform more validation here
    *
-   */
+  */
 
   return true
 }
@@ -41,5 +41,9 @@ export function extractCmdAndArgs(msg) {
  * @param {Message} msg 
  */
 export function logCmd(msg) {
-  console.log(new Date(), msg.user.username, msg.content)
+  const currentTime = (new Date()).toLocaleString()
+  const { username, discriminator } = msg.author
+  const nameWithTag = username + discriminator
+
+  console.log(`${currentTime} - ${nameWithTag}: ${msg.content}`);
 }
