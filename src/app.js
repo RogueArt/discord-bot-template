@@ -3,7 +3,7 @@ import dotenv from 'dotenv'
 dotenv.config()
 
 // Get keys from .env
-const { BOT_TOKEN, CMD_PREFIX } = process.env
+const { BOT_TOKEN, BOT_NAME, CMD_PREFIX } = process.env
 
 // Discord
 import { Client, Intents } from 'discord.js'
@@ -19,7 +19,7 @@ import { hello, help } from './commands/index.js'
 
 // Execute on start up
 client.on('ready', () => {
-  console.log('Your bot name here', 'bot started!')
+  console.log(BOT_NAME, ' started!')
 })
 
 // Execute on message creation
